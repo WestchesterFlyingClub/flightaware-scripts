@@ -1,12 +1,18 @@
 #!/bin/bash
 
-if [ $# -nq 3 ]; then
-    echo "please use: $0" username apikey nnumber
+if [ "$#" -ne 1 ]; then
+    >&2 echo "please use: $0 NNUMBER" 
     exit 1
 fi
 
-USER=$1
-APIKEY=$2
-NNUMBER=$3
+APIVALUE=($(<~/.flightaware_api_key))
+USER=${APIVALUE[0]}
+APIKEY=${APIVALUE[1]}
+NNUMBER=$1
 
-wget --http-user=$USER--http-passwd=$APIKEY -O - "http://flightxml.flightaware.com/json/FlightXML3/FlightInfoStatus?ident=$NNUMBER"
+# alt implementation
+##URL="http://flightxml.flightaware.com/json/FlightXML3/FlightInfoStatus?ident="
+##curl --user $USER:$APIKEY $URL$NNUMBER
+
+wget --http-user=$USER --http-passwd=$APIKEY -O - "http://flightxml.flightaware.com/json/FlightXML3/FlightInfoStatus?ident=$NNUMBER"
+
