@@ -1,7 +1,7 @@
 #!/bin/bash
 
-if [ "$#" -ne 1 ]; then
-    >&2 echo "please use: $0 NNUMBER" 
+if [ "$#" -eq 0 ]; then
+    >&2 echo "please use: $0 NNUMBER OFFSET(optional)"
     exit 1
 fi
 
@@ -14,5 +14,12 @@ NNUMBER=$1
 ##URL="http://flightxml.flightaware.com/json/FlightXML3/FlightInfoStatus?ident="
 ##curl --user $USER:$APIKEY $URL$NNUMBER
 
-wget --http-user=$USER --http-passwd=$APIKEY -O - "http://flightxml.flightaware.com/json/FlightXML3/FlightInfoStatus?ident=$NNUMBER"
+if [ "$#" -eq 1 ]; then
+    wget --http-user=$USER --http-passwd=$APIKEY -O - "http://flightxml.flightaware.com/json/FlightXML3/FlightInfoStatus?ident=$NNUMBER"
+fi
+
+if [ "$#" -eq 2 ]; then
+    OFFSET=$2
+    wget --http-user=$USER --http-passwd=$APIKEY -O - "http://flightxml.flightaware.com/json/FlightXML3/FlightInfoStatus?ident=$NNUMBER&offset=$OFFSET"
+fi
 
