@@ -29,10 +29,10 @@ create table if not exists flight_aware.flights (
 );
 
 
-create view flight_aware.member_flights as
+create or replace view flight_aware.member_flights as
 select * from wfc.schedules s
 join flight_aware.flights f
      on s.nnumber = f.tailnumber
-     and (f.actual_departure_time > s.start_asoftime
-     and f.actual_departure_time < s.end_asoftime)
+     and (f.actual_departure_time between s.start_asoftime and s.end_asoftime
+     or  f.actual_arrival_time  between s.start_asoftime and s.end_asoftime)
      and s.canceled_asoftime is null;
