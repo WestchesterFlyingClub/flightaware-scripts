@@ -15,13 +15,13 @@
  filed_airspeed_kts,
  distance_filed,
 
- filed_departure_time: (if .filed_departure_time.epoch==0 then "\\N" else .filed_departure_time.epoch|todateiso8601 end),
- estimated_departure_time: (if .estimated_departure_time.epoch==0 then "\\N" else .estimated_departure_time.epoch|todateiso8601 end),
- actual_departure_time: (if .actual_departure_time.epoch==0 then "\\N" else .actual_departure_time.epoch|todateiso8601 end),
+ filed_departure_time: (if .filed_departure_time.epoch==0 then null else .filed_departure_time.epoch|todateiso8601 end),
+ estimated_departure_time: (if .estimated_departure_time.epoch==0 then null else .estimated_departure_time.epoch|todateiso8601 end),
+ actual_departure_time: (if .actual_departure_time.epoch==0 then null else .actual_departure_time.epoch|todateiso8601 end),
 
- filed_arrival_time: (if .filed_arrival_time.epoch==0 then "\\N" else .filed_arrival_time.epoch|todateiso8601 end),
- estimated_arrival_time: (if .estimated_arrival_time.epoch==0 then "\\N" else .estimated_arrival_time.epoch|todateiso8601 end),
- actual_arrival_time: (if .actual_arrival_time.epoch==0 then "\\N" else .actual_arrival_time.epoch|todateiso8601 end),
+ filed_arrival_time: (if .filed_arrival_time.epoch==0 then null else .filed_arrival_time.epoch|todateiso8601 end),
+ estimated_arrival_time: (if .estimated_arrival_time.epoch==0 then null else .estimated_arrival_time.epoch|todateiso8601 end),
+ actual_arrival_time: (if .actual_arrival_time.epoch==0 then null else .actual_arrival_time.epoch|todateiso8601 end),
 
  status,
  progress_percent,
