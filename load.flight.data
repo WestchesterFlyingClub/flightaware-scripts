@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [ "$#" -eq 0 ]; then
+    >&2 echo "usage: $0 FLIGHTAWARE_DATA_FILE"
+    exit 1
+fi
+
+FLTDATA=$1
+
+cat $FLTDATA |jq -f flights.jq |\
+    jq -r 'flatten|@tsv'|\
+    psql wfcinfo wfc -c "create temporary table flights_loader (like flight_aware.flights excluding constraints); copy flights_loader from stdin with NULL ''; insert into flight_aware.flights select * from flights_loader ON CONFLICT ON CONSTRAINT flights_pkey DO NOTHING;"
