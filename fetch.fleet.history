@@ -7,7 +7,7 @@ APIKEY=${APIVALUE[1]}
 ## bronze setting
 HOWMANY=30
 
-##for NNUMBER in N17AV N4508X N190FT N787BG N15644 N275BM N9003S N298AM
+## N15644 N275BM
 for NNUMBER in N17AV N4508X N190FT N787BG N9003S N298AM
 do
     wget --http-user=$USER --http-passwd=$APIKEY -O - "http://flightxml.flightaware.com/json/FlightXML3/FlightInfoStatus?ident=$NNUMBER&howMany=$HOWMANY"
